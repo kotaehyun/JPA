@@ -1,0 +1,48 @@
+# 서버 포트 번호
+server:
+  port: 80
+
+
+spring:
+  # 콘솔 ANSI 색상
+  output:
+    ansi:
+      enabled: always
+
+  # Thymeleaf 설정
+  thymeleaf:
+    cache: false
+    prefix: classpath:templates/views/
+
+  # datasource 설정.     Mysql 등 spring-jdbc 사용시 아래 정보 없으면 서버가동 에러.
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${rds.hostname}:${rds.port}/${rds.db.name}?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: ${rds.username}
+    password: ${rds.password}
+
+
+  jpa:
+    # none: production 환경으로 베포할때에는 반드시 none 으로 하자.
+    hibernate:
+      ddl-auto: none
+
+# 각종 설정값들을 임의로 설정한뒤 @Value 로 설정값을 주입받아 사용 가능
+
+app:
+  # 페이징 관련 세팅값
+  pagination:
+    # 기본 write_pages 값. 한 [페이징] 당 몇개의 페이지가 표시되나
+    write_pages: 10
+    # 기본 page_rows 값. 한 '페이지'에 몇개의 글을 리스트 할것인가?
+    page_rows: 10
+
+#파일업로드경로
+  upload:
+    path: upload
+
+
+logging:
+  level:
+    root: DEBUG
+

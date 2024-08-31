@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="comment">
+  <script crossorigin="anonymous" src="https://kit.fontawesome.com/51772bd9bd.js"></script>
+
+  <!-- 댓글 -->
+  <div class="container my-3 border rounded">
+    <div class="mb-3 mt-3">
+      <label>댓글: <span id="cmt_cnt"></span> 개</label>
+      <!-- ROLE_MEMBER 권한 가진 사용자만 댓글 작성 가능 -->
+      <div class="input-group my-2" sec:authorize="hasAnyRole('ADMIN', 'MEMBER')">
+        <input class="form-control" id="input_comment" type="text">
+        <button class="btn btn-outline-primary" id="btn_comment" type="button">작성</button>
+      </div>
+
+      <table class="table table-hover mt-3" id="cmt_table">
+        <thead>
+        <tr>
+          <th style="width: 16.66%">작성자</th>
+          <th>내용</th>
+          <th style="width: 16.66%">작성일</th>
+        </tr>
+        </thead>
+        <tbody id="cmt_list">
+
+<!--        <tr>-->
+<!--          <td><span><strong>USER1</strong><br><small class="text-secondary">홍길동</small></span></td>-->
+<!--          <td>-->
+<!--            <span>잘 이용 하겠습니다..</span>-->
+<!--            <i class="btn fa-solid fa-delete-left text-danger" data-bs-toggle="tooltip" title="삭제"></i>-->
+<!--          </td>-->
+<!--          <td><span><small class="text-secondary">2024.03.12 13:34:05</small></span></td>-->
+<!--        </tr>-->
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- 댓글 -->
+</th:block>
+
+</html>

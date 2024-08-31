@@ -1,0 +1,68 @@
+# 서버 포트 번호
+server:
+  port: 8095
+
+
+spring:
+  # 콘솔 ANSI 색상
+  output:
+    ansi:
+      enabled: always
+
+  # Thymeleaf 설정
+  thymeleaf:
+    cache: false
+    prefix: classpath:templates/views/
+
+  # datasource 설정.     Mysql 등 spring-jdbc 사용시 아래 정보 없으면 서버가동 에러.
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mydb2304?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: admin
+    password: Ab123456789
+
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      hibernate.dialect: org.hibernate.dialect.MySQLDialect  # MySQL 방언 설정 추가
+
+    # DDL(create, alter, drop) 정의시 DB의 고유 기능을 사용할 수 있다.
+    # create: 서버 가동할때마다 기존 테이블을 삭제하고 새로 생성
+    # update: DB테이블와 엔티티 매핑정보를 비교해서 변경사항이 있는 경우만 수정 (ALTER). 테이블 없으면 CREATE
+    # create-drop: 기본적으로 create 와 동일한 동작을 하나, 종료시점에서 drop
+    # none: production 환경으로 베포할때에는 반드시 none 으로 하자.
+    hibernate:
+      ddl-auto: update
+
+  # Spring Boot에서 1MB 보다 작은 파일은 상관없지만 1MB보다 큰 파일 오류.
+  # Spring Boot 1.4.x & 1.5.x
+  # application.properties 파일에 아래 코드를 추가한다.
+  # spring.http.multipart.maxFileSize=50MB
+  # spring.http.multipart.maxRequestSize=50MB
+  # Spring Boot 2.0.0 이상
+  servlet:
+    multipart:
+      max-file-size: 128MB
+      max-request-size: 128MB
+      enabled: true
+
+# 각종 설정값들을 임의로 설정한뒤 @Value 로 설정값을 주입받아 사용 가능
+app:
+  # 페이징 관련 세팅값
+  pagination:
+    # 기본 write_pages 값. 한 [페이징] 당 몇개의 페이지가 표시되나
+    write_pages: 10
+    # 기본 page_rows 값. 한 '페이지'에 몇개의 글을 리스트 할것인가?
+    page_rows: 10
+
+#파일업로드경로
+  upload:
+    path: upload
+
+
+logging:
+  level:
+    root: DEBUG
+
